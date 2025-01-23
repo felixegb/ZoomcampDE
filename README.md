@@ -3,7 +3,7 @@
 ## 📌
 Trabajos y notas en mi apredizaje durante el curso de **[Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp)**.
 
-- **Contenedorización e infraestructura** 
+- **Contenedores e infraestructura** 
 - **Orquestación de flujos de trabajo**   
 - **Ingestión de datos**
 - **Almacenamiento de datos** 
