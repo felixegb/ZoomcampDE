@@ -48,6 +48,7 @@ docker run -it \
         --db=ny_taxi \
         --table_name=yellow_taxi_trips \
         --url=${URL}
+        
 database
 docker run -it \
     --network=pg-network \
@@ -59,3 +60,8 @@ docker run -it \
         --db=ny_taxi \
         --table_name=yellow_taxi_trips \
         --url=${URL}
+
+
+docker-compose up
+docker-compose up -d (whithout logs)
+docker-compose down (delete containers)

@@ -9,9 +9,9 @@ from sqlalchemy import create_engine
 def main (params):
     
     user = params.user
-    passw = params. passw
+    passw = params.passw
     host = params.host
-    port = params. port
+    port = params.port
     db = params.db
     table_name = params.table_name
     url = params.url
@@ -25,7 +25,8 @@ def main (params):
     engine = create_engine(f'postgresql://{user}:{passw}@{host}:{port}/{db}')
 
 
-    df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000, compression='gzip')
+    compression_type = 'gzip' if url.endswith('.csv.gz') else None
+    df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000, compression=compression_type)
 
     df = next(df_iter)
 
@@ -34,7 +35,7 @@ def main (params):
     df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
     df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
-    df.to_sql(name='nueva_tabla', con=engine, if_exists='append')
+    df.to_sql(name=table_name, con=engine, if_exists='append')
 
     while True:
         t_start =  time()
