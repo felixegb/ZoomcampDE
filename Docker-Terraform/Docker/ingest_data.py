@@ -16,13 +16,16 @@ def main (params):
     table_name = params.table_name
     url = params.url
     
-    csv_name = 'F:/data_engineer/archivo.csv'
+    if url.endswith('.csv.gz'):
+        csv_name = 'output.csv.gz'
+    else:
+        csv_name = 'output.csv'
     os.system(f'wget {url} -O {csv_name}')
     
     engine = create_engine(f'postgresql://{user}:{passw}@{host}:{port}/{db}')
 
 
-    df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
+    df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000, compression='gzip')
 
     df = next(df_iter)
 
